@@ -9,14 +9,13 @@ def possible_games(data: list[str], red: int, blue: int, green: int) -> int:
     for line in data:
         game, cubes = line.split(':')
         for part in re.split(';|,', cubes):
-
             if 'red' in part and int(part.split()[0]) > red:
                 break
             if 'blue' in part and int(part.split()[0]) > blue:
                 break
             if 'green' in part and int(part.split()[0]) > green:
                 break
-        else:
+        else:  # if for loop completes without any break
             game_sum += int(game.split()[1])
     return game_sum
 

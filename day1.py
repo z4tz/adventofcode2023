@@ -14,7 +14,7 @@ def calibration_values(data: list[str]) -> int:
 
 def calibration_values_alphanum(data: list[str]) -> int:
     numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
-    replacements = [number + str(i + 1) + number for i, number in enumerate(numbers)]
+    replacements = [number + str(i + 1) + number for i, number in enumerate(numbers)]  # e.g. one -> one1one
     total = 0
     for line in data:
         for i, number in enumerate(numbers):

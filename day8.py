@@ -34,8 +34,7 @@ def steps(data: list[str]) -> tuple[int, int]:
 def main(day: int):
     data = aocinput(day)
     result = steps(data)
-    result2 = 0
-    print(result, result2)
+    print(result)
 
 
 if __name__ == '__main__':

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 from inputreader import aocinput
 from collections import Counter
@@ -9,7 +10,7 @@ class Hand:
         self.bid = bid
         self.hand_type = self._get_hand_type()
 
-    def _get_hand_type(self):
+    def _get_hand_type(self) -> int:
         card_counts = Counter(self.cards)
         if card_counts[0] > 0:  # joker(s) in hand
             joker_count = card_counts.pop(0)
@@ -33,7 +34,7 @@ class Hand:
         else:
             return 0
 
-    def __lt__(self, other):
+    def __lt__(self, other: Hand) -> bool:
         if self.hand_type != other.hand_type:
             return self.hand_type < other.hand_type
         for i in range(len(self.cards)):
@@ -41,7 +42,7 @@ class Hand:
                 return self.cards[i] < other.cards[i]
         return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return ' '.join([str(value) for value in self.cards])
 
 

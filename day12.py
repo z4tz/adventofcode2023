@@ -55,7 +55,6 @@ def main(day: int):
     result = spring_arrangements(data)
     result2 = spring_arrangements(data, 5)
     print(result, result2)
-    return 'aa'
 
 
 if __name__ == '__main__':

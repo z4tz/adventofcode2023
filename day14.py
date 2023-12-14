@@ -2,9 +2,9 @@ import os
 from inputreader import aocinput
 import numpy as np
 
-rock_dict = {'O': 1,
-             '.': 2,
-             '#': 3}
+rock_dict: dict[str, int] = {'O': 1,
+                             '.': 2,
+                             '#': 3}
 
 
 def boulder_load(data: list[str]) -> tuple[int, int]:
@@ -40,16 +40,15 @@ def boulder_load(data: list[str]) -> tuple[int, int]:
 
 def tilt_platform(rocks: np.array, stops: list[list[int]]) -> np.array:
     for i, column in enumerate(rocks.transpose()):
-        for j in range(len(stops[i])-1):
-            column[stops[i][j]+1:stops[i][j+1]].sort()  # sort parts between each square rock
+        for j in range(len(stops[i]) - 1):
+            column[stops[i][j] + 1:stops[i][j + 1]].sort()  # sort parts between each square rock
 
 
 def calculate_load(rocks: np.array) -> int:
     rock_load = 0
-    for column in rocks.transpose():
-        length = rocks.shape[0]
-        rock_load += sum([length - pos for pos in np.where(column == 1)[0]])
-    return int(rock_load)
+    for i, row in enumerate(rocks):
+        rock_load += np.count_nonzero(row == 1) * (rocks.shape[0] - i)
+    return rock_load
 
 
 def main(day: int):

@@ -21,7 +21,7 @@ def time_day(day, mintime=1):
 
 
 def main():
-    days = [int(filename[3:-4]) for filename in os.listdir('inputs/')]
+    days = sorted([int(filename[3:-4]) for filename in os.listdir('inputs/')])
 
     for day in days:
         time_day(day, 1)

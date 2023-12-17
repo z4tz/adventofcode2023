@@ -13,7 +13,9 @@ def energized_tiles(data: dict[complex, str], start: tuple[complex, complex] = (
             if tile is None:
                 break
             visited.add((location, direction))
-            if tile == '/':
+            if tile == '.':
+                pass 
+            elif tile == '/':
                 direction = -complex(direction.imag, direction.real)
             elif tile == '\\':
                 direction = complex(direction.imag, direction.real)

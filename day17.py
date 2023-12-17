@@ -5,32 +5,29 @@ import heapq
 directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
 
-def heat_loss(data: list[str], min_straight, max_straight) -> int:
+def heat_loss(data: list[str], min_straight: int, max_straight: int) -> int:
     goal = (len(data[0].strip())-1, len(data)-1)
     data = {(x, y): int(char) for y, line in enumerate(data) for x, char in enumerate(line.strip())}
     seen = dict()
-    queue = [(0, 0, 0, 0), (0, 0, 0, 1)]
+    queue = [(0, 0, 0, 0), (0, 0, 0, 1)]  # (heat, x, y, direction)
     heapq.heapify(queue)
     while queue:
         heat, x, y, direction = heapq.heappop(queue)
         if (x, y) == goal:
             return heat
-        temp_x = x
-        temp_y = y
-        temp_heat = heat
         dx = directions[direction][0]
         dy = directions[direction][1]
         for i in range(1, max_straight+1):
-            temp_x += dx
-            temp_y += dy
-            if (temp_x, temp_y) not in data:
+            x += dx
+            y += dy
+            if (x, y) not in data:
                 break
-            temp_heat += data[(temp_x, temp_y)]
+            heat += data[(x, y)]
             if i >= min_straight:
                 for temp_direction in [(direction + 1) % 4, (direction - 1) % 4]:
-                    if (temp_x, temp_y, temp_direction) not in seen or seen[(temp_x, temp_y, temp_direction)] > temp_heat:
-                        seen[(temp_x, temp_y, temp_direction)] = temp_heat
-                        heapq.heappush(queue, (temp_heat, temp_x, temp_y, temp_direction))
+                    if (x, y, temp_direction) not in seen or seen[(x, y, temp_direction)] > heat:
+                        seen[(x, y, temp_direction)] = heat
+                        heapq.heappush(queue, (heat, x, y, temp_direction))
 
 
 def main(day: int):

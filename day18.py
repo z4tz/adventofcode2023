@@ -5,7 +5,7 @@ directions = {'R': (1, 0), 'D': (0, 1), 'L': (-1, 0), 'U': (0, -1)}
 hex_directions = {'0': 'R', '1': 'D', '2': 'L', '3': 'U'}
 
 
-def area_by_shoelace(x, y):
+def area_by_shoelace(x: list[int], y: list[int]) -> float:
     return abs(sum(x[i-1]*y[i]-x[i]*y[i-1] for i in range(len(x)))) / 2.
 
 

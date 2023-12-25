@@ -20,13 +20,14 @@ def heat_loss(data: list[str], min_straight: int, max_straight: int) -> int:
         for i in range(1, max_straight+1):
             x += dx
             y += dy
-            if (x, y) not in data:
+            heat_temp = data.get((x, y))
+            if heat_temp is None:
                 break
-            heat += data[(x, y)]
+            heat += heat_temp
             if i >= min_straight:
                 for temp_direction in [(direction + 1) % 4, (direction - 1) % 4]:
-                    if (x, y, temp_direction) not in seen or seen[(x, y, temp_direction)] > heat:
-                        seen[(x, y, temp_direction)] = heat
+                    if (location_direction := (x, y, temp_direction)) not in seen or seen[location_direction] > heat:
+                        seen[location_direction] = heat
                         heapq.heappush(queue, (heat, x, y, temp_direction))
 
 
